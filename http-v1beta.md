@@ -100,9 +100,46 @@ hash = HMAC-SHA256(payload, appsecret).to_hex
 }
 ```
 
-# 提供回调接口, 如 https://merchantapp.com/webhook
+# 提供回调接口,
 
-Hermes 会在针对充值到账、提现到账进行回调通知商户
+如 https://merchantapp.com/webhook
+
+## 充值回调
+
+```json
+# Request
+{
+  "type": "Deposit",
+  "data": {
+    "currency_code": "eth",
+    "txid": "0xethereumtxid",
+    "state": "withdrawing",  // withdrawing|done
+    "external_uuid": "merchant withdraw uuid"
+  }
+}
+```
+
+
+## 提现回调
+
+```json
+# Request
+{
+  "type": "Withdraw",
+  "data": {
+    "currency_code": "eth",
+    "txid": "0xethereumtxid",
+    "address": "0xfromaddress",
+    "state": "depositing",  // depositing|done
+    "amount": 1.0,
+    "memo": "blockchain memo"
+  }
+}
+```
+
+
+
+
 
 
 
