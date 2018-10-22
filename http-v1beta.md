@@ -100,9 +100,17 @@ hash = HMAC-SHA256(payload, appsecret).to_hex
 }
 ```
 
-# 提供回调接口,
+# 提供回调接口
 
-如 https://merchantapp.com/webhook
+Hermes 通过商户提供的回调接口，将充值信息或者提现状态反馈给商户，为了保证安全。回调同样采用上述的认证签名机制, 即发送交易会在 HTTP header 传入
+
+
+1. X-Hermes-Key: <appkey>
+
+2. X-Hermes-Signature: 同理, `hash = HMAC-SHA256(payload, appsecret).to_hex` 结果
+
+3. 回调采用 POST 进行调用
+
 
 ## 充值回调
 
